@@ -5,7 +5,7 @@
 #include<string>
 #include<sstream>
 #include "util/slice.h"
-#include "db/logging.h"
+#include "util/logging.h"
 #include "util/coding.h"
 #include "util/comparator.h"
 namespace leveldb{
