@@ -17,7 +17,7 @@ inline void EncodeFixed32(char* dst,uint32_t value){
 
 }
 
-inline void EncodeFix64(char* dst,uint64_t value){
+inline void EncodeFixed64(char* dst,uint64_t value){
     uint8_t* const buffer = reinterpret_cast<uint8_t*>(dst);
     buffer[0] = static_cast<uint8_t>(value);
     buffer[1] = static_cast<uint8_t>(value>>8);
@@ -195,5 +195,17 @@ int VarintLength(uint64_t v){
         len++;
     }
     return len;
+}
+
+inline uint32_t DecodeFixed64(const char* ptr){
+    const uint8_t* const buffer = reinterpret_cast<const uint8_t*>(ptr);
+    return (static_cast<uint64_t>(buffer[0])) |
+         (static_cast<uint64_t>(buffer[1]) << 8) |
+         (static_cast<uint64_t>(buffer[2]) << 16) |
+         (static_cast<uint64_t>(buffer[3]) << 24) |
+         (static_cast<uint64_t>(buffer[4]) << 32) |
+         (static_cast<uint64_t>(buffer[5]) << 40) |
+         (static_cast<uint64_t>(buffer[6]) << 48) |
+         (static_cast<uint64_t>(buffer[7]) << 56);
 }
 }//leveldb
